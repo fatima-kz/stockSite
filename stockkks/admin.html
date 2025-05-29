@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Admin Panel - Stock Video Hub</title>
+</head>
+<body>
+  <div class="container">
+    <div class="main-header">
+      <div class="admin-header">
+        <h1><i class="fas fa-lock"></i> Admin Panel</h1>
+        <button id="logout-btn" style="display: none;" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </div>
+
+    <section id="login-section" class="form-section">
+      <div class="card">
+        <h2><i class="fas fa-user-shield"></i> Administrator Login</h2>
+        <p>Please enter your credentials to access the admin area</p>
+        
+        <div class="form-group">
+          <label for="username" class="required">Username</label>
+          <input type="text" id="username" placeholder="Enter admin username">
+        </div>
+        <div class="form-group">
+          <label for="password" class="required">Password</label>
+          <input type="password" id="password" placeholder="Enter password">
+        </div>
+        <button onclick="login()">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+      </div>
+    </section>
+
+    <section id="upload-section" style="display: none">
+      <div class="card">
+        
+        <div class="form-group">
+          <label for="title" class="required">Title</label>
+          <input type="text" id="title" placeholder="Enter a descriptive title">
+        </div>
+        <div class="form-group">
+          <label for="description" class="required">Description</label>
+          <textarea id="description" placeholder="Provide details about the video content" rows="4"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="keywords" class="required">Keywords</label>
+          <input type="text" id="keywords" placeholder="Enter comma-separated keywords (e.g., nature, water, mountain)">
+          <small>Keywords help users find your video in search results</small>
+        </div>
+        <div class="form-group">
+          <label for="category" class="required">Category</label>
+          <select id="category">
+            <option value="">Select a category</option>
+            <option value="Nature">Nature</option>
+            <option value="Technology">Technology</option>
+            <option value="Lifestyle">Lifestyle</option>
+            <option value="Business">Business</option>
+            <option value="Education">Education</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Sports">Sports</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="videoFile" class="required">Video File</label>
+          <div class="file-upload">
+            <input type="file" id="videoFile" accept="video/*">
+          </div>
+          <small>Maximum file size: 100MB. Supported formats: MP4, MOV, AVI</small>
+        </div>
+        <button onclick="uploadVideo()" class="upload-btn">
+          <i class="fas fa-upload"></i> Upload Video
+        </button>      </div>
+    </section>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
