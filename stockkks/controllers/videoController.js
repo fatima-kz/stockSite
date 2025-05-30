@@ -27,12 +27,23 @@ export const uploadVideo = (req, res) => {
         return res.status(400).json({ error: 'No video file uploaded' });
       }
       
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        resource_type: 'video',
+      // Create a buffer stream from the file buffer
+      const stream = new Readable();
+      stream.push(req.file.buffer);
+      stream.push(null);
+      
+      // Upload directly to Cloudinary from memory
+      let result = await new Promise((resolve, reject) => {
+        const uploadStream = cloudinary.uploader.upload_stream(
+          { resource_type: 'video' },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        );
+        
+        stream.pipe(uploadStream);
       });
-
-      // Remove local temp file
-      fs.unlinkSync(req.file.path);
 
       const { title, description, keywords, category } = req.body;
       
