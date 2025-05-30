@@ -24,6 +24,9 @@ app.use(express.json());
 const rootDir = path.resolve(__dirname, '..');
 app.use(express.static(rootDir));
 
+
+app.use(express.static(path.join(process.cwd(), 'public')));
+
 // API Routes
 app.use('/api/videos', videoRoutes);
 app.use('/api/auth', authRoutes);
