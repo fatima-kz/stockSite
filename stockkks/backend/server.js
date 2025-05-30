@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import videoRoutes from '../routes/videoRoutes.js';
 import authRoutes from '../routes/authRoutes.js';
+import contactRoutes from '../routes/contactRoutes.js';
 
 // ES Module fix for __dirname
 const __filename = fileURLToPath(import.meta.url);
@@ -30,6 +31,7 @@ app.use(express.static(path.join(process.cwd(), 'public')));
 // API Routes
 app.use('/api/videos', videoRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Serve the frontend for any other route
 app.get('*', (req, res) => {

@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Search and download high-quality stock videos for free." />
-  <meta name="keywords" content="free stock videos, download videos, high quality videos" />
+  <meta name="description" content="Contact Stock Video Hub team for questions, support, or collaboration opportunities." />
+  <meta name="keywords" content="contact us, stock videos, support, help" />
   <meta name="google-adsense-account" content="ca-pub-6933579901691514">
   <meta name="author" content="Stock Video Hub" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
-  <title>Stock Video Hub - Free Stock Videos</title>
+  <title>Contact Us - Stock Video Hub</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6933579901691514"
      crossorigin="anonymous"></script>
 </head>
@@ -20,9 +20,9 @@
         <a href="index.html"><i class="fas fa-film"></i> Stock Video Hub</a>
       </div>
       <ul class="nav-links">
-        <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
         <li><a href="about.html"><i class="fas fa-info-circle"></i> About Us</a></li>
-        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
         <li><a href="privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a></li>
       </ul>
       <div class="mobile-menu-btn">
@@ -32,44 +32,71 @@
   </nav>
 
   <div class="container">
-    <header class="main-header">
-      <h1><i class="fas fa-film"></i> Stock Video Hub</h1>
-      <p>Discover and download premium quality stock videos for your creative projects</p>
-      
-      <div class="search-container">
-        <div>
-          <label for="searchInput">Search Term</label>
-          <input type="text" id="searchInput" placeholder="Search videos..." />
-        </div>
-        <div>
-          <label for="categoryFilter">Category</label>
-          <select id="categoryFilter">
-            <option value="">All Categories</option>
-            <option value="Nature">Nature</option>
-            <option value="Technology">Technology</option>
-            <option value="Lifestyle">Lifestyle</option>
-            <option value="Business">Business</option>
-            <option value="Education">Education</option>
-            <option value="Food">Food</option>
-            <option value="Travel">Travel</option>
-            <option value="Sports">Sports</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div>
-          <button onclick="searchVideos()" class="search-btn">
-            <i class="fas fa-search"></i> Search
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <div class="loading-indicator" id="loading">
-      <div class="spinner"></div>
-      <p>Searching for amazing videos...</p>
+    <div class="page-header">
+      <h1>Contact Us</h1>
+      <p>Have questions or feedback? We'd love to hear from you!</p>
     </div>
 
-    <section id="results"></section>    <footer>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="card">
+          <h2>Get In Touch</h2>
+          <p>We're here to help with any questions about our platform, content, or licensing. Feel free to reach out through any of the methods below.</p>
+          
+          <div class="contact-info-item">
+            <i class="fas fa-envelope"></i>
+            <div>
+              <h3>Email</h3>
+              <p>fatimak2818@gmail.com</p>
+              <p>For general inquiries and support</p>
+            </div>
+          </div>
+          
+          
+          <div class="contact-info-item">
+            <i class="fas fa-phone"></i>
+            <div>
+              <h3>Phone</h3>
+              <p>+92 309-7275317</p>
+              <p>Monday - Friday, 9am - 5pm PST</p>
+            </div>
+          </div>
+          
+          </div>
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <div class="card">
+          <h2>Send us a Message</h2>
+          <p>Fill out the form below and we'll get back to you as soon as possible.</p>
+          
+          <form id="contactForm" onsubmit="return submitContactForm(event)">
+            <div class="form-group">
+              <label for="name" class="required">Your Name</label>
+              <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            
+            <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" name="subject" placeholder="What is this regarding?">
+            </div>
+            
+            <div class="form-group">
+              <label for="message" class="required">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Type your message here..." required></textarea>
+            </div>
+            
+            <button type="submit" class="search-btn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer>
       <div class="footer-content">
         <div class="footer-section">
           <h3>Stock Video Hub</h3>

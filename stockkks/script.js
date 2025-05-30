@@ -1,5 +1,11 @@
 // Check authentication status on page load
 document.addEventListener('DOMContentLoaded', function() {
+  // Setup mobile menu toggle
+  setupMobileMenu();
+  
+  // Setup URL parameter handling for category filters
+  handleURLParameters();
+  
   // Only run on admin page
   if (window.location.pathname.includes('admin')) {
     const token = localStorage.getItem('token');
@@ -11,7 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   } else {
     // On index page, load videos automatically
-    searchVideos();
+    if (document.getElementById('results')) {
+      searchVideos();
+    }
   }
 });
 
@@ -186,12 +194,111 @@ function searchVideos() {
     .catch(err => {
       console.error(err);
       results.innerHTML = `<div class="error"><i class="fas fa-exclamation-triangle"></i> Error loading videos: ${err.message}</div>`;
-    })
-    .finally(() => {
+    })    .finally(() => {
       // Hide loading indicator
       if (loadingIndicator) {
         loadingIndicator.style.display = 'none';
       }
     });
+}
+
+// 📱 Mobile Menu Toggle
+function setupMobileMenu() {
+  const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', function() {
+      navLinks.classList.toggle('active');
+    });
+  }
+  
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (navLinks && navLinks.classList.contains('active')) {
+      if (!event.target.closest('.nav-links') && !event.target.closest('.mobile-menu-btn')) {
+        navLinks.classList.remove('active');
+      }
+    }
+  });
+}
+
+// 🔗 Handle URL Parameters
+function handleURLParameters() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const category = urlParams.get('category');
+  
+  if (category && document.getElementById('categoryFilter')) {
+    document.getElementById('categoryFilter').value = category;
+    searchVideos();
+  }
+}
+
+// 📨 Contact Form Submission
+function submitContactForm(event) {
+  event.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const subject = document.getElementById('subject').value || 'Contact Form Inquiry';
+  const message = document.getElementById('message').value;
+  
+  // Show submission feedback
+  const form = document.getElementById('contactForm');
+  const formContent = form.innerHTML;
+  
+  // Display loading indicator
+  form.innerHTML = `
+    <div class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Sending your message...</p>
+    </div>
+  `;
+  
+  // Send data to the server
+  fetch('/api/contact/submit', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      name,
+      email,
+      subject,
+      message
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Success message
+      form.innerHTML = `
+        <div style="text-align: center; padding: 30px;">
+          <i class="fas fa-check-circle" style="font-size: 3rem; color: #4CAF50; margin-bottom: 20px;"></i>
+          <h3>Thank You!</h3>
+          <p>${data.message || 'Your message has been sent successfully. We\'ll get back to you as soon as possible.'}</p>
+          <button type="button" onclick="resetContactForm()" style="margin-top: 20px;">
+            <i class="fas fa-paper-plane"></i> Send Another Message
+          </button>
+        </div>
+      `;
+    } else {
+      // Error message
+      form.innerHTML = formContent;
+      alert(data.message || 'Failed to send your message. Please try again.');
+    }
+  })
+  .catch(error => {
+    console.error('Error submitting form:', error);
+    form.innerHTML = formContent;
+    alert('An error occurred while sending your message. Please try again later.');
+  });
+  
+  return false;
+}
+
+// Reset contact form to original state
+function resetContactForm() {
+  location.reload();
 }
 
