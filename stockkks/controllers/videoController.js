@@ -1,7 +1,7 @@
 import Video from '../models/Video.js';
 import cloudinary from '../utils/cloudinary.js';
 import multer from 'multer';
-import fs from 'fs';
+import { Readable } from 'stream';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -9,20 +9,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Set up temp storage for uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadDir = path.join(__dirname, '../uploads');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-    cb(null, uploadDir);
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
-
+// Configure multer for memory storage instead of disk storage
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Create middleware for video upload
