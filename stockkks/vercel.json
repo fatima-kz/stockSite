@@ -16,12 +16,28 @@
     {
       "src": "*.js",
       "use": "@vercel/static"
+    },
+    {
+      "src": "*.xml",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "robots.txt",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     { 
       "src": "/api/(.*)", 
       "dest": "backend/server.js" 
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "/sitemap.xml"
+    },
+    {
+      "src": "/robots.txt",
+      "dest": "/robots.txt"
     },
     { 
       "src": "/admin", 
