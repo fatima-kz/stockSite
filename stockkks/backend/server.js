@@ -43,6 +43,10 @@ app.get('*', (req, res) => {
   }
 });
 
+app.get("/sitemap.xml", (req, res) => {
+  res.set("Content-Type", "application/xml");
+  res.sendFile(path.join(__dirname, "public", "sitemap.xml"));
+});
 
 
 // DB Connection
